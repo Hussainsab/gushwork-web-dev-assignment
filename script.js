@@ -74,9 +74,13 @@ document.addEventListener('DOMContentLoaded', () => {
             currentIdx = (idx + total) % total;
             mainImg.src = D.product.images[currentIdx];
 
-            // Thumbnail highlight
+            // Thumbnail highlight + Scroll into view
             document.querySelectorAll('.next-img > div').forEach((div, i) => {
-                div.classList.toggle('active-thumb', i === currentIdx);
+                const isActive = i === currentIdx;
+                div.classList.toggle('active-thumb', isActive);
+                if (isActive) {
+                    div.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
             });
         };
 

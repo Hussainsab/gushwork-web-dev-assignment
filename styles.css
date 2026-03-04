@@ -176,11 +176,22 @@ a {
 .next-img {
 	display: flex;
 	gap: 20px;
+	overflow-x: auto;
+	scrollbar-width: none;
+	/* Firefox */
+	-webkit-overflow-scrolling: touch;
+	/* Add smooth touch scrolling for iOS */
+}
+
+.next-img::-webkit-scrollbar {
+	display: none;
+	/* Safari/Chrome */
 }
 
 .next-img>div {
 	width: 80px;
 	height: 80px;
+	flex-shrink: 0;
 	border-radius: 8px;
 	border: 1px solid #CFD1D4;
 }
@@ -249,6 +260,7 @@ a {
 
 .product-shipping-box {
 	display: flex;
+	flex-wrap: wrap;
 	gap: 8px;
 }
 
@@ -2191,9 +2203,10 @@ p {
 .zoom-panel {
 	position: absolute;
 	left: calc(100% + 16px);
-	top: 0;
-	width: 340px;
-	height: 300px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 350px;
+	height: 350px;
 	border-radius: 12px;
 	border: 1px solid #E1E3E8;
 	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
@@ -2327,8 +2340,8 @@ p {
 
 /* ── 3. APPLICATION CAROUSEL ── */
 .application-card-container {
-	scroll-behavior: smooth;
 	scrollbar-width: none;
+	-webkit-overflow-scrolling: touch;
 }
 
 .application-card-container::-webkit-scrollbar {
