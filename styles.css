@@ -152,8 +152,8 @@ a {
 }
 
 .product-gallery {
-	min-width: 570px;
-	width: 100%;
+	flex: 1;
+	min-width: 0;
 	height: fit-content;
 	display: flex;
 	flex-direction: column;
@@ -186,6 +186,8 @@ a {
 }
 
 .product-info {
+	flex: 1;
+	min-width: 0;
 	display: flex;
 	flex-direction: column;
 	gap: 40px;
@@ -195,6 +197,7 @@ a {
 	display: flex;
 	width: 100%;
 	gap: 12px;
+	flex-wrap: wrap;
 }
 
 .product-certifications>div {
@@ -214,7 +217,7 @@ a {
 	font-family: 'Urbanist', sans-serif;
 	font-weight: 700;
 	font-style: Bold;
-	font-size: 56px;
+	font-size: clamp(36px, 4vw, 56px);
 	line-height: 120%;
 	letter-spacing: 0px;
 }
@@ -233,18 +236,15 @@ a {
 .procduct-price-box {
 	display: flex;
 	flex-direction: column;
-	width: 490;
-	height: 184;
-	padding-top: 16px;
-	padding-right: 20px;
-	padding-bottom: 16px;
-	padding-left: 20px;
+	width: 100%;
+	max-width: 490px;
+	height: auto;
+	padding: 16px 20px;
 	gap: 16px;
 	opacity: 1;
 	border-radius: 10px;
-	border-width: 1px;
 	background: #FFFFFF;
-	border: 1px solid #CFD1D4
+	border: 1px solid #CFD1D4;
 }
 
 .product-shipping-box {
@@ -1196,8 +1196,10 @@ p {
 .solution-card {
 	display: flex;
 	flex-direction: column;
-	max-width: 397px;
-	height: 486px;
+	flex: 1;
+	min-width: 0;
+	min-height: 486px;
+	height: auto;
 	padding: 24px;
 	background: #FFFFFF;
 	border: 1.25px solid #CFD1D4;
@@ -1224,8 +1226,9 @@ p {
 }
 
 .solution-card>img {
-	max-width: 349px;
-	max-height: 179px;
+	width: 100%;
+	height: 179px;
+	object-fit: cover;
 	border-radius: 16px;
 	margin-top: auto;
 	margin-bottom: 20px;
@@ -1262,7 +1265,8 @@ p {
 }
 
 .solution-cta-content {
-	width: 651px;
+	flex: 1;
+	min-width: 0;
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
@@ -1366,7 +1370,967 @@ p {
 	letter-spacing: -0.6%;
 }
 
-.document-download-section>.doc>a>img {
-	width: 24px;
-	height: 24px;
+
+/* ============================================
+   CONTACT SECTION
+   ============================================ */
+
+.contact-section {
+	background-color: #2B3990;
+	position: relative;
+	overflow: hidden;
+}
+
+/* Subtle noise texture overlay */
+.contact-section::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background-image: url('./assets/images/NoiseAndTexture.png');
+	background-size: cover;
+	opacity: 0.06;
+	pointer-events: none;
+}
+
+.contact-container {
+	display: flex;
+	align-items: center;
+	gap: 60px;
+	padding-top: 80px;
+	padding-bottom: 80px;
+	position: relative;
+	z-index: 1;
+}
+
+/* ---- Left: CTA copy ---- */
+.contact-cta-content {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	color: #ffffff;
+}
+
+.contact-cta-content h2 {
+	font-family: 'Urbanist', sans-serif;
+	font-weight: 700;
+	font-size: 44px;
+	line-height: 120%;
+	color: #ffffff;
+}
+
+.contact-cta-content>p {
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 160%;
+	color: rgba(255, 255, 255, 0.82);
+	max-width: 460px;
+}
+
+.contact-divider {
+	border: none;
+	border-top: 1px solid rgba(255, 255, 255, 0.25);
+	margin: 0;
+}
+
+.contact-assistance {
+	font-size: 14px !important;
+	line-height: 22px;
+	color: rgba(255, 255, 255, 0.75) !important;
+	max-width: 480px;
+}
+
+.contact-assistance strong {
+	color: #ffffff;
+	font-weight: 600;
+}
+
+.contact-email-link {
+	color: #ffffff;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	font-weight: 500;
+}
+
+.contact-email-link:hover {
+	opacity: 0.85;
+}
+
+/* ---- Right: Form card ---- */
+.contact-form-card {
+	flex: 0 0 380px;
+	background: #ffffff;
+	border-radius: 16px;
+	padding: 32px;
+	box-shadow: 0px 24px 48px -12px rgba(0, 0, 0, 0.25);
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.contact-form-title {
+	font-family: 'Urbanist', sans-serif;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 24px;
+	color: #111827;
+}
+
+.contact-form {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.form-group {
+	width: 100%;
+}
+
+.form-input {
+	width: 100%;
+	padding: 10px 14px;
+	border: 1px solid #E1E3E8;
+	border-radius: 8px;
+	font-size: 14px;
+	line-height: 20px;
+	color: #262A2E;
+	background: #ffffff;
+	box-shadow: 0px 1px 2px 0px rgba(10, 13, 20, 0.03);
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+	outline: none;
+	font-family: 'Inter', sans-serif;
+}
+
+.form-input::placeholder {
+	color: #9CA3AF;
+}
+
+.form-input:focus {
+	border-color: #2B3990;
+	box-shadow: 0 0 0 3px rgba(43, 57, 144, 0.12);
+}
+
+/* Phone row */
+.phone-input-wrapper {
+	display: flex;
+	border: 1px solid #E1E3E8;
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0px 1px 2px 0px rgba(10, 13, 20, 0.03);
+}
+
+.phone-input-wrapper:focus-within {
+	border-color: #2B3990;
+	box-shadow: 0 0 0 3px rgba(43, 57, 144, 0.12);
+}
+
+.country-code-select {
+	padding: 10px 10px 10px 12px;
+	border: none;
+	border-right: 1px solid #E1E3E8;
+	background: #F7F8F9;
+	font-size: 14px;
+	color: #262A2E;
+	cursor: pointer;
+	outline: none;
+	flex-shrink: 0;
+	font-family: 'Inter', sans-serif;
+}
+
+.phone-input {
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+	flex: 1;
+}
+
+.phone-input:focus {
+	border-color: transparent;
+	box-shadow: none;
+}
+
+.contact-submit-btn {
+	width: 100%;
+	padding: 12px 24px;
+	background: #111827;
+	color: #ffffff;
+	border: none;
+	border-radius: 10px;
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 22px;
+	cursor: pointer;
+	margin-top: 4px;
+	transition: background 0.2s ease, transform 0.15s ease;
+	font-family: 'Inter', sans-serif;
+}
+
+.contact-submit-btn:hover {
+	background: #1f2937;
+	transform: translateY(-1px);
+}
+
+.contact-submit-btn:active {
+	transform: translateY(0);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer-section {
+	background: #F7F8F9;
+	border-top: 1px solid #E1E3E8;
+}
+
+.footer-container {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+	padding-top: 48px;
+	padding-bottom: 48px;
+}
+
+/* ---- Top banner card ---- */
+.footer-banner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+	background: #ffffff;
+	border: 1px solid #E1E3E8;
+	box-shadow: 0px 2px 4px 0px rgba(27, 28, 29, 0.04);
+	border-radius: 16px;
+	padding: 24px 32px;
+}
+
+.footer-banner-logo {
+	flex-shrink: 0;
+}
+
+.footer-logo-img {
+	height: 56px;
+	width: auto;
+	object-fit: contain;
+}
+
+.footer-banner-tagline {
+	font-family: 'Urbanist', sans-serif;
+	font-weight: 600;
+	font-size: 22px;
+	line-height: 130%;
+	color: #111827;
+	text-align: right;
+	max-width: 420px;
+}
+
+.tagline-highlight {
+	color: #2B3990;
+}
+
+/* ---- Four-column nav grid ---- */
+.footer-main {
+	display: grid;
+	grid-template-columns: 1fr 2fr 2fr 2fr;
+	gap: 40px;
+	padding-top: 32px;
+	border-top: 1px solid #E1E3E8;
+}
+
+.footer-col-heading {
+	font-weight: 600;
+	font-size: 13px;
+	line-height: 20px;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	color: #111827;
+	margin-bottom: 16px;
+}
+
+.footer-col-list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.footer-link {
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 20px;
+	color: #4D545C;
+	transition: color 0.18s ease;
+}
+
+.footer-link:hover {
+	color: #2B3990;
+}
+
+/* ---- Contact column specifics ---- */
+.footer-contact-list {
+	gap: 12px;
+}
+
+.footer-contact-item {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	font-size: 14px;
+	line-height: 20px;
+	color: #4D545C;
+}
+
+.footer-contact-icon {
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	margin-top: 2px;
+}
+
+/* ---- Social icons ---- */
+.footer-social {
+	display: flex;
+	gap: 10px;
+	margin-top: 20px;
+}
+
+.footer-social-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	border: 1px solid #E1E3E8;
+	border-radius: 8px;
+	background: #ffffff;
+	color: #4D545C;
+	transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.footer-social-link:hover {
+	color: #2B3990;
+	border-color: #2B3990;
+	background: rgba(43, 57, 144, 0.05);
+}
+
+/* ============================================================
+   RESPONSIVE  — Tablet/Mobile  ≤ 800px
+   Design changes only at ≤ 800px and ≤ 360px.
+   The container max-width is 1240px and stays the same above 800px.
+   ============================================================ */
+
+@media (max-width: 800px) {
+
+	/* Prevent horizontal overflow */
+	html,
+	body {
+		overflow-x: hidden;
+	}
+
+	/* ---- Container: reduce side padding ---- */
+	.container {
+		padding-left: 24px !important;
+		padding-right: 24px !important;
+	}
+
+	.header-container {
+		padding: 14px 24px;
+		height: auto;
+	}
+
+	/* ---- PRODUCT HERO — info first, gallery last ---- */
+	.product-hero-wrapper {
+		flex-direction: column;
+		gap: 32px;
+	}
+
+	/* Product info comes first (order 1), gallery at bottom (order 2) */
+	.product-info {
+		order: 1;
+	}
+
+	.product-gallery {
+		order: 2;
+		min-width: unset;
+		width: 100%;
+	}
+
+	.product-gallery>.main-img {
+		height: 400px;
+	}
+
+	.product-title {
+		font-size: 36px;
+	}
+
+	.product-actions {
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+
+	.quote-button {
+		flex: 1;
+	}
+
+	.product-trusted-by-company-logos {
+		flex-wrap: wrap;
+		gap: 16px;
+	}
+
+	/* ---- TECHNICAL SPEC ---- */
+	.technical-spec-table th,
+	.technical-spec-table td {
+		padding: 12px 16px;
+	}
+
+	/* ---- SECTION HEADINGS ---- */
+	.technical-spec-container>.section-header>h2,
+	.benifits-container>.section-header>h2,
+	.faq-section>h2,
+	.application-header>.heading>h2,
+	.proccess-header>h2,
+	.feedback-header>h2,
+	.solution-header>h2,
+	.resource-header>h2 {
+		font-size: 32px !important;
+	}
+
+	/* ---- BENEFITS — 2-col grid ---- */
+	.benifit-card {
+		flex: 0 0 calc(50% - 24px);
+	}
+
+	/* ---- FAQ / CATALOGUE ---- */
+	.catalouge-box {
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.catalogue-header {
+		width: 100%;
+	}
+
+	.catelouge-form,
+	.catelouge-form>#email {
+		width: 100%;
+	}
+
+	/* ---- APPLICATION CARDS ---- */
+	.application-header {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 16px;
+	}
+
+	.application-card {
+		min-width: 320px;
+		height: 360px;
+	}
+
+	/* ---- MANUFACTURING PROCESS ----
+	   On mobile: hide pill-step row; JS injects a "Step X/8: Name" badge
+	   and Previous / Next text-buttons.                                   */
+	.process-steps {
+		display: none;
+	}
+
+	.process-detail {
+		flex-direction: column;
+		gap: 24px;
+	}
+
+	.process-detail>.detail {
+		width: 100%;
+	}
+
+	.process-actions {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+	}
+
+	/* JS-injected elements */
+	.process-step-badge {
+		display: inline-flex;
+		align-items: center;
+		background: #2B3990;
+		color: #fff;
+		font-size: 13px;
+		font-weight: 600;
+		padding: 6px 14px;
+		border-radius: 999px;
+		margin-bottom: 16px;
+		width: fit-content;
+	}
+
+	.process-mobile-nav {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 24px;
+	}
+
+	.process-nav-btn {
+		background: none;
+		border: 1px solid #CFD1D4;
+		border-radius: 8px;
+		padding: 10px 18px;
+		font-size: 14px;
+		font-weight: 500;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		color: #262A2E;
+		transition: border-color 0.2s, color 0.2s;
+	}
+
+	.process-nav-btn:hover {
+		border-color: #2B3990;
+		color: #2B3990;
+	}
+
+	.process-nav-btn:disabled {
+		opacity: 0.35;
+		cursor: default;
+	}
+
+	/* ---- FEEDBACK CARDS ---- */
+	.feedback-card {
+		min-width: 300px;
+	}
+
+	/* ---- SOLUTION PORTFOLIO ---- */
+	.solution-card-container {
+		flex-direction: column;
+	}
+
+	.solution-card {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.solution-card>img {
+		max-width: 100%;
+		max-height: 200px;
+		object-fit: cover;
+	}
+
+	.solution-action {
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.solution-cta-content {
+		width: 100%;
+	}
+
+	/* ---- RESOURCES & DOWNLOADS — stack name above link ---- */
+	.document-download-section>.doc {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 6px;
+	}
+
+	/* ---- CONTACT ---- */
+	.contact-container {
+		flex-direction: column;
+		gap: 36px;
+		padding-top: 64px;
+		padding-bottom: 64px;
+	}
+
+	.contact-cta-content h2 {
+		font-size: 32px;
+	}
+
+	.contact-form-card {
+		flex: 0 0 auto;
+		width: 100%;
+		max-width: 100%;
+	}
+
+	/* ---- FOOTER ---- */
+	.footer-banner {
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 20px 24px;
+	}
+
+	.footer-banner-tagline {
+		text-align: left;
+		font-size: 18px;
+	}
+
+	.footer-main {
+		grid-template-columns: 1fr 1fr;
+		gap: 32px;
+	}
+
+	.footer-container {
+		padding-top: 40px;
+		padding-bottom: 40px;
+	}
+}
+
+/* ============================================================
+   RESPONSIVE  — Extra-Small Mobile  ≤ 360px
+   ============================================================ */
+
+@media (max-width: 360px) {
+
+	.container {
+		padding-left: 16px !important;
+		padding-right: 16px !important;
+	}
+
+	.header-container {
+		padding: 10px 16px;
+	}
+
+	.logo img {
+		height: 28px;
+		width: auto;
+	}
+
+	.nav-cta-button {
+		padding: 8px 10px;
+		font-size: 12px;
+	}
+
+	/* ---- PRODUCT HERO (360px)
+	   Order: certifications → title → features → GALLERY → price → 1 button
+	   The JS moves .product-gallery after .product-features when ≤360px.
+	   CSS just ensures correct sizing.                                          ---- */
+	.product-gallery>.main-img {
+		height: 260px;
+	}
+
+	.next-img>div {
+		width: 52px;
+		height: 52px;
+	}
+
+	.product-title {
+		font-size: 26px;
+	}
+
+	/* Hide "View Technical Specs" (only "Get Custom Quote" shown) */
+	.spec-button {
+		display: none;
+	}
+
+	.quote-button {
+		width: 100%;
+		font-size: 15px;
+		padding: 14px 20px;
+	}
+
+	.product-certifications {
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	/* ---- SECTION HEADINGS ---- */
+	.technical-spec-container>.section-header>h2,
+	.benifits-container>.section-header>h2,
+	.faq-section>h2,
+	.application-header>.heading>h2,
+	.proccess-header>h2,
+	.feedback-header>h2,
+	.solution-header>h2,
+	.resource-header>h2 {
+		font-size: 24px !important;
+	}
+
+	/* Section body text */
+	.technical-spec-container>.section-header>p,
+	.benifits-container>.section-header>p,
+	.proccess-header>p,
+	.feedback-header>p,
+	.solution-header>p,
+	.resource-header>p {
+		font-size: 15px !important;
+	}
+
+	/* ---- SPEC TABLE ---- */
+	.technical-spec-table {
+		font-size: 12px;
+	}
+
+	.technical-spec-table th,
+	.technical-spec-table td {
+		padding: 8px 10px;
+	}
+
+	/* ---- BENEFITS — 1-col ---- */
+	.benifit-card {
+		flex: 0 0 100%;
+	}
+
+	/* ---- APPLICATION CARDS ---- */
+	.application-card {
+		min-width: 260px;
+		height: 300px;
+	}
+
+	/* ---- FEEDBACK CARDS ---- */
+	.feedback-card {
+		min-width: 260px;
+		padding: 20px;
+		height: auto;
+	}
+
+	/* ---- PROCESS ---- */
+	.process-steps-container {
+		padding: 20px 16px;
+	}
+
+	.process-detail>.detail>h3 {
+		font-size: 20px;
+	}
+
+	/* ---- FAQ ---- */
+	.faq-title {
+		font-size: 14px;
+	}
+
+	/* ---- CONTACT ---- */
+	.contact-cta-content h2 {
+		font-size: 22px;
+	}
+
+	.contact-form-card {
+		padding: 20px 14px;
+	}
+
+	.form-input,
+	.country-code-select {
+		font-size: 13px;
+	}
+
+	.contact-submit-btn {
+		font-size: 14px;
+		padding: 11px;
+	}
+
+	/* ---- FOOTER ---- */
+	.footer-banner-tagline {
+		font-size: 15px;
+	}
+
+	.footer-logo-img {
+		height: 40px;
+	}
+
+	.footer-main {
+		grid-template-columns: 1fr;
+		gap: 24px;
+	}
+
+	.footer-container {
+		padding-top: 28px;
+		padding-bottom: 28px;
+	}
+}
+
+/* =========================================================================
+   STYLES MOVED FROM JAVASCRIPT
+========================================================================= */
+
+/* ── 1. GALLERY ZOOM ── */
+.main-img {
+	position: relative;
+	overflow: hidden;
+	border-radius: 12px;
+	cursor: crosshair;
+	flex-shrink: 0;
+}
+
+.main-img>img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	user-select: none;
+	pointer-events: none;
+}
+
+.next-img>div {
+	cursor: pointer;
+	border-radius: 8px;
+	border: 2px solid transparent;
+	transition: border-color 0.2s, transform 0.15s;
+}
+
+.next-img>div:hover {
+	transform: scale(1.04);
+}
+
+.next-img>div.active-thumb {
+	border-color: #2B3990;
+}
+
+.zoom-lens {
+	position: absolute;
+	width: 120px;
+	height: 100px;
+	border: 2px solid rgba(255, 255, 255, 0.7);
+	border-radius: 4px;
+	background: rgba(255, 255, 255, 0.18);
+	backdrop-filter: blur(0px);
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.15s ease;
+	z-index: 5;
+}
+
+.main-img.zooming .zoom-lens {
+	opacity: 1;
+}
+
+.zoom-panel {
+	position: absolute;
+	left: calc(100% + 16px);
+	top: 0;
+	width: 340px;
+	height: 300px;
+	border-radius: 12px;
+	border: 1px solid #E1E3E8;
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+	overflow: hidden;
+	display: none;
+	background-repeat: no-repeat;
+	z-index: 100;
+	background-color: #f7f8f9;
+}
+
+.zoom-panel.active {
+	display: block;
+}
+
+@media (max-width: 800px) {
+	.zoom-lens {
+		display: none !important;
+	}
+
+	.zoom-panel {
+		display: none !important;
+	}
+
+	.main-img {
+		cursor: default;
+	}
+}
+
+/* ── 2. STICKY PRODUCT BAR ── */
+#product-sticky-bar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 900;
+	background: #ffffff;
+	border-bottom: 1px solid #E1E3E8;
+	box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 48px;
+	transform: translateY(-100%);
+	transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+	gap: 20px;
+}
+
+#product-sticky-bar.visible {
+	transform: translateY(0);
+}
+
+.psb-left {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	flex: 1;
+	min-width: 0;
+}
+
+.psb-thumb {
+	width: 52px;
+	height: 52px;
+	object-fit: cover;
+	border-radius: 8px;
+	flex-shrink: 0;
+}
+
+.psb-info {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+.psb-title {
+	font-family: 'Inter', sans-serif;
+	font-weight: 600;
+	font-size: 14px;
+	color: #111827;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.psb-price {
+	font-family: 'Inter', sans-serif;
+	font-weight: 500;
+	font-size: 13px;
+	color: #4D545C;
+}
+
+.psb-cta {
+	flex-shrink: 0;
+	background: #2B3990;
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	padding: 10px 22px;
+	font-family: 'Inter', sans-serif;
+	font-weight: 600;
+	font-size: 14px;
+	cursor: pointer;
+	transition: background 0.2s, transform 0.15s;
+	white-space: nowrap;
+}
+
+.psb-cta:hover {
+	background: #1f2c7a;
+	transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+	#product-sticky-bar {
+		padding: 8px 16px;
+	}
+
+	.psb-title {
+		font-size: 12px;
+		max-width: 160px;
+	}
+
+	.psb-price {
+		font-size: 12px;
+	}
+
+	.psb-cta {
+		padding: 8px 14px;
+		font-size: 13px;
+	}
+}
+
+/* ── 3. APPLICATION CAROUSEL ── */
+.application-card-container {
+	scroll-behavior: smooth;
+	scrollbar-width: none;
+}
+
+.application-card-container::-webkit-scrollbar {
+	display: none;
 }
