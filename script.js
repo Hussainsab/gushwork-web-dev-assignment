@@ -19,7 +19,7 @@
 ===================================================== */
 document.addEventListener('DOMContentLoaded', () => {
 
-    const D = SITE_DATA; // alias
+    const data = SITE_DATA; // alias
 
     /* ===================================================
        1. RENDER DYNAMIC CONTENT FROM SITE_DATA
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const nextImgWrap = document.querySelector('.next-img');
         if (!nextImgWrap) return;
         nextImgWrap.innerHTML = '';
-        D.product.images.forEach((src, i) => {
+        data.product.images.forEach((src, i) => {
             const div = document.createElement('div');
             div.setAttribute('data-index', i);
             div.style.backgroundImage = `url('${src}')`;
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const stepsRow = document.querySelector('.process-steps');
         if (!stepsRow) return;
         stepsRow.innerHTML = '<hr>';
-        D.processSteps.forEach((step, i) => {
+        data.processSteps.forEach((step, i) => {
             const span = document.createElement('span');
             span.textContent = step.name;
             span.setAttribute('data-index', i);
@@ -67,12 +67,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const leftBtn = mainImgWrapper.querySelector('.left-arrow-button');
         const rightBtn = mainImgWrapper.querySelector('.right-arrow-button');
         let currentIdx = 0;
-        const total = D.product.images.length;
+        const total = data.product.images.length;
 
         /* ── Set active image ── */
         window.setGalleryImage = function (idx) {
             currentIdx = (idx + total) % total;
-            mainImg.src = D.product.images[currentIdx];
+            mainImg.src = data.product.images[currentIdx];
 
             // Thumbnail highlight + Scroll into view
             document.querySelectorAll('.next-img > div').forEach((div, i) => {
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         /* ── Zoom logic ── */
         function getImageSrc() {
-            return D.product.images[currentIdx];
+            return data.product.images[currentIdx];
         }
 
         function updateZoomPanel(imgSrc) {
@@ -189,10 +189,10 @@ document.addEventListener('DOMContentLoaded', () => {
         bar.id = 'product-sticky-bar';
         bar.innerHTML = `
       <div class="psb-left">
-        <img class="psb-thumb" src="${D.product.images[0]}" alt="">
+        <img class="psb-thumb" src="${data.product.images[0]}" alt="">
         <div class="psb-info">
-          <span class="psb-title">${D.product.title}</span>
-          <span class="psb-price">${D.product.price.currency}${D.product.price.min} - ${D.product.price.max}</span>
+          <span class="psb-title">${data.product.title}</span>
+          <span class="psb-price">${data.product.price.currency}${data.product.price.min} - ${data.product.price.max}</span>
         </div>
       </div>
       <button class="psb-cta">Get Custom Quote</button>
@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const imgRight = document.querySelector('.process-actions .right-arrow-button');
         if (!stepsRow || !detailBlock || !detailEl) return;
 
-        const steps = D.processSteps;
+        const steps = data.processSteps;
         const total = steps.length;
         let current = 0;
         let isMobileUI = false;

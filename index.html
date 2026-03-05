@@ -27,11 +27,11 @@
 						<a href="" class="nav-link">About Us</a>
 					</li>
 					<li class="nav-item">
-						<button type="button" class="nav-dropdown-toggle" aria-expanded="false"
-							aria-controls="product-menu">
+						<div class="nav-dropdown-toggle" aria-expanded="false" aria-controls="product-menu"
+							aria-haspopup="true" role="button" tabindex="0" aria-label="Products menu">
 							<span>Products</span>
-							<img src="./assets/icons/CaretDown.svg" alt="down caret icon">
-						</button>
+							<img src="./assets/icons/CaretDown.svg" alt="" aria-hidden="true">
+						</div>
 						<ul id="product-menu" class="dropdown-menu" hidden>
 							<li class="dropdown-item"><a href="" class="dopdown-link">product 1</a></li>
 							<li class="dropdown-item"><a href="" class="dopdown-link">product 2</a></li>
@@ -62,10 +62,11 @@
 				<div class="product-hero-wrapper">
 					<div class="product-gallery">
 						<div class="main-img">
-							<img src="./assets/images/productImage.jpg" alt="">
-							<button class="left-arrow-button"><img src="./assets/icons/Arrow.svg"
-									alt=""></button><button class="right-arrow-button"><img
-									src="./assets/icons/Arrow.svg" alt="" class="right-arrow"></button>
+							<img src="./assets/images/productImage.jpg" alt="Premium HDPE Pipe">
+							<button class="left-arrow-button" aria-label="Previous image"><img
+									src="./assets/icons/Arrow.svg" alt="" aria-hidden="true"></button><button
+								class="right-arrow-button" aria-label="Next image"><img src="./assets/icons/Arrow.svg"
+									alt="" aria-hidden="true" class="right-arrow"></button>
 						</div>
 						<div class="next-img">
 							<div></div>
@@ -190,7 +191,13 @@
 						</tr>
 					</tbody>
 				</table>
-				<button class="cta-download"> <img src="./assets/icons/Download.svg" alt=""><span>Download full
+				<button class="cta-download"> <svg width="16" height="16" viewBox="0 0 16 16"
+						xmlns="http://www.w3.org/2000/svg">
+						<path
+							d="M14.25 9.5V13C14.25 13.3315 14.1183 13.6495 13.8839 13.8839C13.6495 14.1183 13.3315 14.25 13 14.25H3C2.66848 14.25 2.35054 14.1183 2.11612 13.8839C1.8817 13.6495 1.75 13.3315 1.75 13V9.5C1.75 9.30109 1.82902 9.11032 1.96967 8.96967C2.11032 8.82902 2.30109 8.75 2.5 8.75C2.69891 8.75 2.88968 8.82902 3.03033 8.96967C3.17098 9.11032 3.25 9.30109 3.25 9.5V12.75H12.75V9.5C12.75 9.30109 12.829 9.11032 12.9697 8.96967C13.1103 8.82902 13.3011 8.75 13.5 8.75C13.6989 8.75 13.8897 8.82902 14.0303 8.96967C14.171 9.11032 14.25 9.30109 14.25 9.5ZM7.46938 10.0306C7.53905 10.1005 7.62185 10.156 7.71301 10.1939C7.80418 10.2317 7.90191 10.2512 8.00062 10.2512C8.09934 10.2512 8.19707 10.2317 8.28824 10.1939C8.3794 10.156 8.4622 10.1005 8.53187 10.0306L11.0319 7.53062C11.1728 7.38973 11.2519 7.19863 11.2519 6.99937C11.2519 6.80012 11.1728 6.60902 11.0319 6.46812C10.891 6.32723 10.6999 6.24807 10.5006 6.24807C10.3014 6.24807 10.1103 6.32723 9.96937 6.46812L8.75 7.6875V2.5C8.75 2.30109 8.67098 2.11032 8.53033 1.96967C8.38968 1.82902 8.19891 1.75 8 1.75C7.80109 1.75 7.61032 1.82902 7.46967 1.96967C7.32902 2.11032 7.25 2.30109 7.25 2.5V7.6875L6.03062 6.46938C5.88973 6.32848 5.69863 6.24932 5.49937 6.24932C5.30012 6.24932 5.10902 6.32848 4.96812 6.46938C4.82723 6.61027 4.74807 6.80137 4.74807 7.00063C4.74807 7.19988 4.82723 7.39098 4.96812 7.53188L7.46938 10.0306Z"
+							fill="white" />
+					</svg>
+					<span>Download full
 						technical
 						dashboard</span></button>
 			</div>
@@ -304,6 +311,15 @@
 							allowing
 							for intricate designs and shapes that are essential in manufacturing processes.</p>
 					</article>
+					<article class="faq">
+						<div class="faq-question-box" role="button" tabindex="0" aria-expanded="false">
+							<h4 class="faq-title">What is the lead time for large commercial orders?</h4>
+							<img src="./assets/icons/CaretDown.svg" alt="" aria-hidden="true">
+						</div>
+						<p class="faq-answer">It is designed to cut various types of sheet metal with precision,
+							allowing
+							for intricate designs and shapes that are essential in manufacturing processes.</p>
+					</article>
 				</div>
 
 				<div class="catalouge-box">
@@ -330,9 +346,10 @@
 							performance across diverse applications.</p>
 					</div>
 					<div class="application-actions">
-						<button class="left-arrow-button"><img src="./assets/icons/Arrow.svg" alt=""></button><button
-							class="right-arrow-button"><img src="./assets/icons/Arrow.svg" alt=""
-								class="right-arrow"></button>
+						<button class="left-arrow-button" aria-label="Previous applications"><img
+								src="./assets/icons/Arrow.svg" alt="" aria-hidden="true"></button><button
+							class="right-arrow-button" aria-label="Next applications"><img
+								src="./assets/icons/Arrow.svg" alt="" class="right-arrow" aria-hidden="true"></button>
 					</div>
 				</header>
 			</div>
@@ -419,9 +436,10 @@
 						</div>
 						<div class="process-actions">
 							<img src="./assets/images/productImage.jpg" alt="">
-							<button class="left-arrow-button"><img src="./assets/icons/Arrow.svg"
-									alt=""></button><button class="right-arrow-button"><img
-									src="./assets/icons/Arrow.svg" alt="" class="right-arrow"></button>
+							<button class="left-arrow-button" aria-label="Previous step"><img
+									src="./assets/icons/Arrow.svg" alt="" aria-hidden="true"></button><button
+								class="right-arrow-button" aria-label="Next step"><img src="./assets/icons/Arrow.svg"
+									alt="" class="right-arrow" aria-hidden="true"></button>
 						</div>
 					</div>
 				</div>
@@ -563,18 +581,33 @@
 				<div class="document-download-section">
 					<div class="doc">
 						<p>HDPE Pipe Installation Manual (PDF)</p>
-						<a href="" download=".pdf"><span>Download PDF</span> <img src="./assets/icons/Download.png"
-								alt=""></a>
+						<a href="" download=".pdf"><span>Download PDF</span> <svg width="16" height="16"
+								viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path
+									d="M14.25 9.5V13C14.25 13.3315 14.1183 13.6495 13.8839 13.8839C13.6495 14.1183 13.3315 14.25 13 14.25H3C2.66848 14.25 2.35054 14.1183 2.11612 13.8839C1.8817 13.6495 1.75 13.3315 1.75 13V9.5C1.75 9.30109 1.82902 9.11032 1.96967 8.96967C2.11032 8.82902 2.30109 8.75 2.5 8.75C2.69891 8.75 2.88968 8.82902 3.03033 8.96967C3.17098 9.11032 3.25 9.30109 3.25 9.5V12.75H12.75V9.5C12.75 9.30109 12.829 9.11032 12.9697 8.96967C13.1103 8.82902 13.3011 8.75 13.5 8.75C13.6989 8.75 13.8897 8.82902 14.0303 8.96967C14.171 9.11032 14.25 9.30109 14.25 9.5ZM7.46938 10.0306C7.53905 10.1005 7.62185 10.156 7.71301 10.1939C7.80418 10.2317 7.90191 10.2512 8.00062 10.2512C8.09934 10.2512 8.19707 10.2317 8.28824 10.1939C8.3794 10.156 8.4622 10.1005 8.53187 10.0306L11.0319 7.53062C11.1728 7.38973 11.2519 7.19863 11.2519 6.99937C11.2519 6.80012 11.1728 6.60902 11.0319 6.46812C10.891 6.32723 10.6999 6.24807 10.5006 6.24807C10.3014 6.24807 10.1103 6.32723 9.96937 6.46812L8.75 7.6875V2.5C8.75 2.30109 8.67098 2.11032 8.53033 1.96967C8.38968 1.82902 8.19891 1.75 8 1.75C7.80109 1.75 7.61032 1.82902 7.46967 1.96967C7.32902 2.11032 7.25 2.30109 7.25 2.5V7.6875L6.03062 6.46938C5.88973 6.32848 5.69863 6.24932 5.49937 6.24932C5.30012 6.24932 5.10902 6.32848 4.96812 6.46938C4.82723 6.61027 4.74807 6.80137 4.74807 7.00063C4.74807 7.19988 4.82723 7.39098 4.96812 7.53188L7.46938 10.0306Z"
+									fill="#2B3990" />
+							</svg>
+						</a>
 					</div>
 					<div class="doc">
 						<p>Maintenance & Inspection Handbook (PDF)</p>
-						<a href="" download=".pdf"><span>Download PDF</span> <img src="./assets/icons/Download.png"
-								alt=""></a>
+						<a href="" download=".pdf"><span>Download PDF</span><svg width="16" height="16"
+								viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path
+									d="M14.25 9.5V13C14.25 13.3315 14.1183 13.6495 13.8839 13.8839C13.6495 14.1183 13.3315 14.25 13 14.25H3C2.66848 14.25 2.35054 14.1183 2.11612 13.8839C1.8817 13.6495 1.75 13.3315 1.75 13V9.5C1.75 9.30109 1.82902 9.11032 1.96967 8.96967C2.11032 8.82902 2.30109 8.75 2.5 8.75C2.69891 8.75 2.88968 8.82902 3.03033 8.96967C3.17098 9.11032 3.25 9.30109 3.25 9.5V12.75H12.75V9.5C12.75 9.30109 12.829 9.11032 12.9697 8.96967C13.1103 8.82902 13.3011 8.75 13.5 8.75C13.6989 8.75 13.8897 8.82902 14.0303 8.96967C14.171 9.11032 14.25 9.30109 14.25 9.5ZM7.46938 10.0306C7.53905 10.1005 7.62185 10.156 7.71301 10.1939C7.80418 10.2317 7.90191 10.2512 8.00062 10.2512C8.09934 10.2512 8.19707 10.2317 8.28824 10.1939C8.3794 10.156 8.4622 10.1005 8.53187 10.0306L11.0319 7.53062C11.1728 7.38973 11.2519 7.19863 11.2519 6.99937C11.2519 6.80012 11.1728 6.60902 11.0319 6.46812C10.891 6.32723 10.6999 6.24807 10.5006 6.24807C10.3014 6.24807 10.1103 6.32723 9.96937 6.46812L8.75 7.6875V2.5C8.75 2.30109 8.67098 2.11032 8.53033 1.96967C8.38968 1.82902 8.19891 1.75 8 1.75C7.80109 1.75 7.61032 1.82902 7.46967 1.96967C7.32902 2.11032 7.25 2.30109 7.25 2.5V7.6875L6.03062 6.46938C5.88973 6.32848 5.69863 6.24932 5.49937 6.24932C5.30012 6.24932 5.10902 6.32848 4.96812 6.46938C4.82723 6.61027 4.74807 6.80137 4.74807 7.00063C4.74807 7.19988 4.82723 7.39098 4.96812 7.53188L7.46938 10.0306Z"
+									fill="#2B3990" />
+							</svg>
+						</a>
 					</div>
 					<div class="doc">
 						<p>Engineering Specifications Sheet (PDF)</p>
-						<a href="" download=".pdf"><span>Download PDF</span> <img src="./assets/icons/Download.png"
-								alt=""></a>
+						<a href="" download=".pdf"><span>Download PDF</span> <svg width="16" height="16"
+								viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path
+									d="M14.25 9.5V13C14.25 13.3315 14.1183 13.6495 13.8839 13.8839C13.6495 14.1183 13.3315 14.25 13 14.25H3C2.66848 14.25 2.35054 14.1183 2.11612 13.8839C1.8817 13.6495 1.75 13.3315 1.75 13V9.5C1.75 9.30109 1.82902 9.11032 1.96967 8.96967C2.11032 8.82902 2.30109 8.75 2.5 8.75C2.69891 8.75 2.88968 8.82902 3.03033 8.96967C3.17098 9.11032 3.25 9.30109 3.25 9.5V12.75H12.75V9.5C12.75 9.30109 12.829 9.11032 12.9697 8.96967C13.1103 8.82902 13.3011 8.75 13.5 8.75C13.6989 8.75 13.8897 8.82902 14.0303 8.96967C14.171 9.11032 14.25 9.30109 14.25 9.5ZM7.46938 10.0306C7.53905 10.1005 7.62185 10.156 7.71301 10.1939C7.80418 10.2317 7.90191 10.2512 8.00062 10.2512C8.09934 10.2512 8.19707 10.2317 8.28824 10.1939C8.3794 10.156 8.4622 10.1005 8.53187 10.0306L11.0319 7.53062C11.1728 7.38973 11.2519 7.19863 11.2519 6.99937C11.2519 6.80012 11.1728 6.60902 11.0319 6.46812C10.891 6.32723 10.6999 6.24807 10.5006 6.24807C10.3014 6.24807 10.1103 6.32723 9.96937 6.46812L8.75 7.6875V2.5C8.75 2.30109 8.67098 2.11032 8.53033 1.96967C8.38968 1.82902 8.19891 1.75 8 1.75C7.80109 1.75 7.61032 1.82902 7.46967 1.96967C7.32902 2.11032 7.25 2.30109 7.25 2.5V7.6875L6.03062 6.46938C5.88973 6.32848 5.69863 6.24932 5.49937 6.24932C5.30012 6.24932 5.10902 6.32848 4.96812 6.46938C4.82723 6.61027 4.74807 6.80137 4.74807 7.00063C4.74807 7.19988 4.82723 7.39098 4.96812 7.53188L7.46938 10.0306Z"
+									fill="#2B3990" />
+							</svg>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -584,49 +617,54 @@
 		<section class="contact-section" id="contact">
 			<div class="container contact-container">
 				<!-- Left: CTA Content -->
-				<div class="contact-cta-content">
-					<h2>Ready to Transform Your Textile Manufacturing?</h2>
-					<p>Get a personalized consultation and quote for machinery solutions tailored to your specific
-						production requirements.</p>
-					<hr class="contact-divider">
-					<p class="contact-assistance">For immediate assistance, feel free to give us a direct call at
-						<strong>+91-XXX-XXX-XXXX.</strong> You can also send us a quick email at <a
-							href="mailto:info@meeraind.com" class="contact-email-link">info@meeraind.com</a></p>
+				<div class="contact-wrapper">
+
+					<div class="contact-cta-content">
+						<h2>Ready to Transform Your Textile Manufacturing?</h2>
+						<p>Get a personalized consultation and quote for machinery solutions tailored to your specific
+							production requirements.</p>
+						<hr class="contact-divider">
+						<p class="contact-assistance">For immediate assistance, feel free to give us a direct call at
+							<strong>+91-XXX-XXX-XXXX.</strong> You can also send us a quick email at <a
+								href="mailto:info@meeraind.com" class="contact-email-link">info@meeraind.com</a>
+						</p>
+					</div>
+
+					<!-- Right: Contact Form Card -->
+					<div class="contact-form-card">
+						<h3 class="contact-form-title">Contact Us Today</h3>
+						<form action="" class="contact-form" id="contactForm" novalidate>
+							<div class="form-group">
+								<input type="text" id="fullName" name="fullName" class="form-input"
+									placeholder="Full Name" required>
+							</div>
+							<div class="form-group">
+								<input type="text" id="companyName" name="companyName" class="form-input"
+									placeholder="Company Name">
+							</div>
+							<div class="form-group">
+								<input type="email" id="emailAddress" name="emailAddress" class="form-input"
+									placeholder="Email Address" required>
+							</div>
+							<div class="form-group phone-group">
+								<div class="phone-input-wrapper">
+									<select name="countryCode" id="countryCode" class="country-code-select"
+										aria-label="Country code">
+										<option value="+91">+91</option>
+										<option value="+1">+1</option>
+										<option value="+44">+44</option>
+										<option value="+971">+971</option>
+										<option value="+65">+65</option>
+									</select>
+									<input type="tel" id="phoneNumber" name="phoneNumber" class="form-input phone-input"
+										placeholder="7003026616">
+								</div>
+							</div>
+							<button type="submit" class="contact-submit-btn">Request Custom Quote</button>
+						</form>
+					</div>
 				</div>
 
-				<!-- Right: Contact Form Card -->
-				<div class="contact-form-card">
-					<h3 class="contact-form-title">Contact Us Today</h3>
-					<form action="" class="contact-form" id="contactForm" novalidate>
-						<div class="form-group">
-							<input type="text" id="fullName" name="fullName" class="form-input" placeholder="Full Name"
-								required>
-						</div>
-						<div class="form-group">
-							<input type="text" id="companyName" name="companyName" class="form-input"
-								placeholder="Company Name">
-						</div>
-						<div class="form-group">
-							<input type="email" id="emailAddress" name="emailAddress" class="form-input"
-								placeholder="Email Address" required>
-						</div>
-						<div class="form-group phone-group">
-							<div class="phone-input-wrapper">
-								<select name="countryCode" id="countryCode" class="country-code-select"
-									aria-label="Country code">
-									<option value="+91">+91</option>
-									<option value="+1">+1</option>
-									<option value="+44">+44</option>
-									<option value="+971">+971</option>
-									<option value="+65">+65</option>
-								</select>
-								<input type="tel" id="phoneNumber" name="phoneNumber" class="form-input phone-input"
-									placeholder="7003026616">
-							</div>
-						</div>
-						<button type="submit" class="contact-submit-btn">Request Custom Quote</button>
-					</form>
-				</div>
 			</div>
 		</section>
 	</main>
@@ -634,7 +672,6 @@
 	<!-- ============ FOOTER ============ -->
 	<footer class="footer-section">
 		<div class="container footer-container">
-			<!-- Top banner card -->
 			<div class="footer-banner">
 				<div class="footer-banner-logo">
 					<img src="./assets/images/logo.png" alt="Mangalam HDPE Pipes logo" class="footer-logo-img">
@@ -643,7 +680,6 @@
 						Manufacturer</span> in South India</p>
 			</div>
 
-			<!-- Bottom nav columns -->
 			<div class="footer-main">
 				<!-- About Us -->
 				<div class="footer-col">
@@ -754,8 +790,18 @@
 						</a>
 					</div>
 				</div>
-			</div><!-- /.footer-main -->
-		</div><!-- /.container -->
+			</div>
+		</div>
+		<div class="copyright-section">
+			<div class="container copyright">
+				<p>Copyright © 2025 Meera Industries Limited | All Rights Reserved</p>
+				<ul class="policy">
+					<li>Privacy Policy</li>
+					<li>Terms of Service</li>
+					<li>Sitemap</li>
+				</ul>
+			</div>
+		</div>
 	</footer>
 
 	<script src="data.js"></script>
