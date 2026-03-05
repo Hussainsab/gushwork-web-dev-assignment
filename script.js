@@ -1,29 +1,10 @@
-/**
- * script.js — Mangalam HDPE Pipes
- * Reads all data from SITE_DATA (data.js).
- *
- * Sections:
- *  1. Render dynamic content from SITE_DATA
- *  2. Product gallery carousel + image zoom
- *  3. Sticky product bar (appears after hero fold)
- *  4. Nav dropdown & sticky main-nav
- *  5. FAQ accordion
- *  6. Application carousel (fix left-button selector)
- *  7. Manufacturing process — desktop tabs + mobile Step X/8 nav
- *  8. Product gallery reorder for ≤ 360px
- *  9. Contact form validation
- */
 
-/* =====================================================
-   WAIT FOR DOM
-===================================================== */
 document.addEventListener('DOMContentLoaded', () => {
 
     const data = SITE_DATA; // alias
 
-    /* ===================================================
-       1. RENDER DYNAMIC CONTENT FROM SITE_DATA
-    =================================================== */
+    /* here i am loading the dynamic donent for the site data especially 
+    for the carousel and manufacturing process steps that changes the design in mobile devide */
     renderGalleryThumbnails();
     renderProcessSteps();
 
@@ -56,9 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ===================================================
-       2. PRODUCT GALLERY CAROUSEL + ZOOM
-    =================================================== */
+    /*  PRODUCT GALLERY CAROUSEL + ZOOM  implementation*/
     (function initProductGallery() {
         const mainImgWrapper = document.querySelector('.product-gallery .main-img');
         if (!mainImgWrapper) return;
@@ -87,10 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
         leftBtn.addEventListener('click', () => setGalleryImage(currentIdx - 1));
         rightBtn.addEventListener('click', () => setGalleryImage(currentIdx + 1));
 
-        /* ── AMAZON-STYLE ZOOM ──────────────────────────────────────
+        /*
            Lens:   semi-transparent box that follows cursor on image.
            Panel:  absolute box beside the image showing magnified region.
-        ──────────────────────────────────────────────────────────── */
+       */
         const ZOOM_FACTOR = 3;          // 3× magnification
         const LENS_W = 120;        // lens width  (px)
         const LENS_H = 100;        // lens height (px)
@@ -114,14 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
         /* ── Zoom logic ── */
         function getImageSrc() {
             return data.product.images[currentIdx];
-        }
-
-        function updateZoomPanel(imgSrc) {
-            // Background image = same src, scaled up ZOOM_FACTOR times
-            const bgW = mainImgWrapper.offsetWidth * ZOOM_FACTOR;
-            const bgH = mainImgWrapper.offsetHeight * ZOOM_FACTOR;
-            panel.style.backgroundImage = `url('${imgSrc}')`;
-            panel.style.backgroundSize = `${bgW}px ${bgH}px`;
         }
 
         function onMouseMove(e) {
@@ -175,12 +146,34 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     })();
 
+    /*  PRODUCT GALLERY REORDER  ≤ 360px
+       Move gallery between features and price box. */
+    (function initGalleryReorder() {
+        const wrapper = document.querySelector('.product-hero-wrapper');
+        const gallery = document.querySelector('.product-gallery');
+        const features = document.querySelector('.product-features');
+        if (!wrapper || !gallery || !features) return;
 
-    /* ===================================================
-       3. PRODUCT STICKY BAR
+        let moved = false;
+
+        function apply() {
+            if (window.innerWidth <= 360) {
+                if (!moved) { features.insertAdjacentElement('afterend', gallery); moved = true; }
+            } else {
+                if (moved) { wrapper.insertBefore(gallery, wrapper.firstElementChild); moved = false; }
+            }
+        }
+
+        apply();
+        let t;
+        window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(apply, 80); });
+    })();
+
+
+    /* PRODUCT STICKY BAR
        Appears after the hero section (first fold) scrolls
-       out of view. Shows: thumbnail | title | price | CTA.
-    =================================================== */
+       out of view. Shows: thumbnail | title | price | CTA. */
+       
     (function initStickyProductBar() {
         const heroSection = document.querySelector('.product-detail-section');
         if (!heroSection) return;
@@ -200,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(bar);
 
 
-        // Smart sticky: hide on scroll-DOWN, reveal on scroll-UP (like mobile nav)
+        // hide on scroll-DOWN, reveal on scroll-UP (like mobile nav)
         // But only active once past the hero section.
         let lastScrollY = window.scrollY;
         let barVisible = false;
@@ -227,27 +220,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         window.addEventListener('scroll', onScroll, { passive: true });
         onScroll();
-    })();
-
-
-    /* ===================================================
-       4. NAV DROPDOWN (products menu)
-    =================================================== */
-    (function initNavDropdown() {
-        const toggleBtn = document.querySelector('.nav-dropdown-toggle');
-        const dropdownMenu = document.getElementById('product-menu');
-        if (!toggleBtn || !dropdownMenu) return;
-
-        const open = () => { dropdownMenu.hidden = false; toggleBtn.setAttribute('aria-expanded', 'true'); };
-        const close = () => { dropdownMenu.hidden = true; toggleBtn.setAttribute('aria-expanded', 'false'); };
-
-        toggleBtn.addEventListener('click', () =>
-            toggleBtn.getAttribute('aria-expanded') === 'true' ? close() : open()
-        );
-        document.addEventListener('click', (e) => {
-            if (!toggleBtn.contains(e.target) && !dropdownMenu.contains(e.target)) close();
-        });
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
     })();
 
 
@@ -289,31 +261,9 @@ document.addEventListener('DOMContentLoaded', () => {
     })();
 
 
-    /* ===================================================
-       6. APPLICATION CAROUSEL
-       Fix: use specific selectors to avoid hitting
-       the product-gallery buttons by mistake.
-    =================================================== */
-    (function initApplicationCarousel() {
-        const container = document.querySelector('.application-card-container');
-        // Use the section-scoped buttons inside .application-actions
-        const leftBtn = document.querySelector('.application-actions .left-arrow-button');
-        const rightBtn = document.querySelector('.application-actions .right-arrow-button');
-        if (!container) return;
-
-
-
-        const SCROLL = 460;
-        if (leftBtn) leftBtn.addEventListener('click', () => container.scrollBy({ left: -SCROLL, behavior: 'smooth' }));
-        if (rightBtn) rightBtn.addEventListener('click', () => container.scrollBy({ left: SCROLL, behavior: 'smooth' }));
-    })();
-
-
-    /* ===================================================
-       7. MANUFACTURING PROCESS
+    /* MANUFACTURING PROCESS
        Desktop  : image left/right arrows + pill clicks → navigate steps.
-       Mobile ≤ 800px: image arrows hidden; injected Prev/Next text buttons navigate.
-    =================================================== */
+       Mobile ≤ 800px: image arrows hidden; injected Prev/Next text buttons navigate.*/
     (function initManufacturingProcess() {
         const stepsRow = document.querySelector('.process-steps');
         const detailBlock = document.querySelector('.process-detail');
@@ -329,11 +279,11 @@ document.addEventListener('DOMContentLoaded', () => {
         let badge = null;
         let mobileNav = null;
 
-        /* ── Inject CSS: hide image arrows on mobile ── */
+        /* ── hide image arrows on mobile ── */
         const procStyle = document.createElement('style');
         document.head.appendChild(procStyle);
 
-        /* ── Core: go to a step ── */
+        /* ── go to a step ── */
         function goTo(idx) {
             current = (idx + total) % total;
             renderContent(current);
@@ -417,91 +367,73 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', applyLayout);
     })();
 
+    /* DOWNLOAD BROCHURE MODAL  */
+    (function initDownloadModal() {
+        const modal = document.getElementById('downloadModal');
+        const openBtns = document.querySelectorAll('.cta-download');
+        const closeBtn = document.querySelector('.download-modal-close');
+        if (!modal) return;
 
-    /* ===================================================
-       8. PRODUCT GALLERY REORDER  ≤ 360px
-       Move gallery between features and price box.
-    =================================================== */
-    (function initGalleryReorder() {
-        const wrapper = document.querySelector('.product-hero-wrapper');
-        const gallery = document.querySelector('.product-gallery');
-        const features = document.querySelector('.product-features');
-        if (!wrapper || !gallery || !features) return;
-
-        let moved = false;
-
-        function apply() {
-            if (window.innerWidth <= 360) {
-                if (!moved) { features.insertAdjacentElement('afterend', gallery); moved = true; }
-            } else {
-                if (moved) { wrapper.insertBefore(gallery, wrapper.firstElementChild); moved = false; }
-            }
+        function openModal() {
+            modal.hidden = false;
+            document.body.style.overflow = 'hidden';
         }
 
-        apply();
-        let t;
-        window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(apply, 80); });
-    })();
-
-
-    /* ===================================================
-       9. CONTACT FORM VALIDATION
-    =================================================== */
-    (function initContactForm() {
-        const form = document.getElementById('contactForm');
-        if (!form) return;
-
-        function showError(input, msg) {
-            clearError(input);
-            input.style.borderColor = '#EF4444';
-            const err = document.createElement('span');
-            err.className = 'field-error';
-            Object.assign(err.style, { display: 'block', color: '#EF4444', fontSize: '12px', marginTop: '4px' });
-            err.textContent = msg;
-            input.parentNode.appendChild(err);
-        }
-        function clearError(input) {
-            input.style.borderColor = '';
-            input.parentNode.querySelector('.field-error')?.remove();
+        function closeModal() {
+            modal.hidden = true;
+            document.body.style.overflow = '';
         }
 
-        form.addEventListener('submit', (e) => {
+        openBtns.forEach(btn => btn.addEventListener('click', (e) => {
             e.preventDefault();
-            let valid = true;
+            openModal();
+        }));
 
-            const name = document.getElementById('fullName');
-            const email = document.getElementById('emailAddress');
-            const phone = document.getElementById('phoneNumber');
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
-            if (!name?.value.trim()) { showError(name, 'Full name is required.'); valid = false; }
-            else clearError(name);
-
-            if (!email?.value.trim()) { showError(email, 'Email is required.'); valid = false; }
-            else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { showError(email, 'Enter a valid email.'); valid = false; }
-            else clearError(email);
-
-            if (phone?.value.trim() && !/^[0-9\s\-()+]{7,15}$/.test(phone.value)) {
-                showError(phone, 'Enter a valid phone number.'); valid = false;
-            } else if (phone) clearError(phone);
-
-            if (valid) {
-                const btn = form.querySelector('.contact-submit-btn');
-                btn.textContent = 'Sending…';
-                btn.disabled = true;
-                setTimeout(() => {
-                    btn.textContent = '✓ Request Sent!';
-                    btn.style.background = '#16a34a';
-                    form.reset();
-                    setTimeout(() => {
-                        btn.textContent = 'Request Custom Quote';
-                        btn.style.background = '';
-                        btn.disabled = false;
-                    }, 3000);
-                }, 1200);
-            }
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
         });
 
-        form.querySelectorAll('.form-input').forEach(inp => inp.addEventListener('input', () => clearError(inp)));
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.hidden) closeModal();
+        });
     })();
 
-}); // end DOMContentLoaded
+    /*  REQUEST QUOTE MODAL */
+    (function initQuoteModal() {
+        const modal = document.getElementById('quoteModal');
+        const openBtns = document.querySelectorAll('.quote-button, .cta-request-button, .psb-cta');
+        const closeBtn = document.getElementById('quoteModalClose');
+        const form = document.getElementById('quoteForm');
+
+        if (!modal || !form) return;
+
+        function openModal() {
+            modal.hidden = false;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.hidden = true;
+            document.body.style.overflow = '';
+        }
+
+        openBtns.forEach(btn => btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        }));
+
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.hidden) closeModal();
+        });
+
+    })();
+
+});
