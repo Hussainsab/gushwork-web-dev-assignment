@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderGalleryThumbnails();
     renderProcessSteps();
 
+    // here we just loop all product images and show them off as small thumbnails at the bottom
+    // the first one gets an active class so it looks selected right away
     function renderGalleryThumbnails() {
         const nextImgWrap = document.querySelector('.next-img');
         if (!nextImgWrap) return;
@@ -24,6 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // this one takes the steps from the data and makes a nice little timeline of pills
+    // we set the first step to active so you know where you start
     function renderProcessSteps() {
         const stepsRow = document.querySelector('.process-steps');
         if (!stepsRow) return;
@@ -37,7 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /*  PRODUCT GALLERY CAROUSEL + ZOOM  implementation*/
+    /*  PRODUCT GALLERY CAROUSEL + ZOOM  implementation
+     alright so this big chunk sets up the whole main image viewer with zooming
+     it connects the arrows and does the lens thing when you hover */
     (function initProductGallery() {
         const mainImgWrapper = document.querySelector('.product-gallery .main-img');
         if (!mainImgWrapper) return;
@@ -49,6 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const total = data.product.images.length;
 
         /* ── Set active image ── */
+        // we call this whenever someone clicks a thumbnail or arrows
+        // it updates the big image and makes sure the clicked thumbnail is active and scrolled into view
         window.setGalleryImage = function (idx) {
             currentIdx = (idx + total) % total;
             mainImg.src = data.product.images[currentIdx];
@@ -90,11 +98,13 @@ document.addEventListener('DOMContentLoaded', () => {
         galleryEl.appendChild(panel);
 
 
-        /* ── Zoom logic ── */
+        // tiny helper just to quickly get the url of the image we are looking at right now
         function getImageSrc() {
             return data.product.images[currentIdx];
         }
 
+        // this is all the crazy math for the zoom effect when mouse moves over the image
+        // it figures out where the lens should be and updates the zoom panel background to match
         function onMouseMove(e) {
             const rect = mainImgWrapper.getBoundingClientRect();
             let x = e.clientX - rect.left;
@@ -137,6 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Update panel image when gallery slide changes
+        // saving the old gallery image setter and adding a bit more stuff to it
+        // so the zoom panel image updates instantly if its open when we change slides
         const _origSetGallery = window.setGalleryImage;
         window.setGalleryImage = function (idx) {
             _origSetGallery(idx);
@@ -147,7 +159,9 @@ document.addEventListener('DOMContentLoaded', () => {
     })();
 
     /*  PRODUCT GALLERY REORDER  ≤ 360px
-       Move gallery between features and price box. */
+       Move gallery between features and price box.
+     for really small mobile screens under 360px we gotta move the gallery below the features
+     so this handles checking screen size and moving the html block around  */
     (function initGalleryReorder() {
         const wrapper = document.querySelector('.product-hero-wrapper');
         const gallery = document.querySelector('.product-gallery');
@@ -156,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let moved = false;
 
+        // the actual function that checks width and moves the gallery element if we need to
         function apply() {
             if (window.innerWidth <= 360) {
                 if (!moved) { features.insertAdjacentElement('afterend', gallery); moved = true; }
@@ -172,8 +187,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* PRODUCT STICKY BAR
        Appears after the hero section (first fold) scrolls
-       out of view. Shows: thumbnail | title | price | CTA. */
-       
+       out of view. Shows: thumbnail | title | price | CTA.
+
+     this sets up a sticky bar at the bottom with price and buy button
+     it only shows up when you scroll past the main top area so it doesn't annoy you instantly  */
     (function initStickyProductBar() {
         const heroSection = document.querySelector('.product-detail-section');
         if (!heroSection) return;
@@ -182,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bar.id = 'product-sticky-bar';
         bar.innerHTML = `
       <div class="psb-left">
-        <img class="psb-thumb" src="${data.product.images[0]}" alt="">
+        <img loading="lazy" class="psb-thumb" src="${data.product.images[0]}" alt="">
         <div class="psb-info">
           <span class="psb-title">${data.product.title}</span>
           <span class="psb-price">${data.product.price.currency}${data.product.price.min} - ${data.product.price.max}</span>
@@ -198,9 +215,11 @@ document.addEventListener('DOMContentLoaded', () => {
         let lastScrollY = window.scrollY;
         let barVisible = false;
 
+        // these just add or remove a class so the css can slide the bar in and out
         function show() { if (!barVisible) { bar.classList.add('visible'); barVisible = true; } }
         function hide() { if (barVisible) { bar.classList.remove('visible'); barVisible = false; } }
 
+        // checks where we are scrolled to so we know if we should show or hide the sticky bottom bar
         function onScroll() {
             const heroBottom = heroSection.getBoundingClientRect().bottom;
             const scrollY = window.scrollY;
@@ -223,9 +242,10 @@ document.addEventListener('DOMContentLoaded', () => {
     })();
 
 
-    /* ===================================================
-       5. FAQ ACCORDION
-    =================================================== */
+    /* FAQ ACCORDION
+     
+     connects all the faq accordions
+     so when you click a question it opens the answer and closes whatever else was open */
     (function initFAQ() {
         const faqs = document.querySelectorAll('.faq');
         faqs.forEach((faq) => {
@@ -237,6 +257,8 @@ document.addEventListener('DOMContentLoaded', () => {
             box.setAttribute('tabindex', '0');
             box.setAttribute('aria-expanded', answer.classList.contains('active') ? 'true' : 'false');
 
+            // handles the actual opening and closing logic for a single faq question
+            // flips the arrow icon too
             function toggle() {
                 const isOpen = answer.classList.contains('active');
                 faqs.forEach((f) => {
@@ -263,7 +285,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* MANUFACTURING PROCESS
        Desktop  : image left/right arrows + pill clicks → navigate steps.
-       Mobile ≤ 800px: image arrows hidden; injected Prev/Next text buttons navigate.*/
+       Mobile ≤ 800px: image arrows hidden; injected Prev/Next text buttons navigate.
+     sets up the whole manufacturing process section
+     handles switching steps with arrows or pills and making it look right on phone UI*/
     (function initManufacturingProcess() {
         const stepsRow = document.querySelector('.process-steps');
         const detailBlock = document.querySelector('.process-detail');
@@ -283,7 +307,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const procStyle = document.createElement('style');
         document.head.appendChild(procStyle);
 
-        /* ── go to a step ── */
+        // moves the slider to a specific step index
+        // updates the content and makes sure the right pill is highlighted
         function goTo(idx) {
             current = (idx + total) % total;
             renderContent(current);
@@ -294,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isMobileUI) updateMobileNav();
         }
 
-        /* ── Render step content ── */
+        // grabs the text and image for a step from our data and shoves it into the html tags
         function renderContent(idx) {
             const s = steps[idx];
             const h3 = detailEl.querySelector('h3');
@@ -322,7 +347,9 @@ document.addEventListener('DOMContentLoaded', () => {
         /* ── Initial render ── */
         renderContent(0);
 
-        /* ── Mobile UI (injected) ── */
+        /*  Mobile UI (injected)  
+        updates the text on the mobile buttons so it says which step we are on, like "Step 2/5"
+        also disables previous or next button if we are at the very beginning or end */
         function updateMobileNav() {
             if (badge) badge.textContent = `Step ${current + 1}/${total}: ${steps[current].name}`;
             const prev = document.getElementById('procPrev');
@@ -331,6 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (next) next.disabled = (current === total - 1);
         }
 
+        // creates the extra previous and next buttons dynamically if someone is on a small screen
         function buildMobileUI() {
             badge = document.createElement('div');
             badge.className = 'process-step-badge';
@@ -351,12 +379,14 @@ document.addEventListener('DOMContentLoaded', () => {
             updateMobileNav();
         }
 
+        // cleans up those extra mobile buttons if user resizes back to a big desktop screen
         function destroyMobileUI() {
             badge?.remove(); badge = null;
             mobileNav?.remove(); mobileNav = null;
             isMobileUI = false;
         }
 
+        // checks window size and decides if we need to build or destroy the mobile step navigation
         function applyLayout() {
             const shouldMobile = window.innerWidth <= 800;
             if (shouldMobile && !isMobileUI) buildMobileUI();
@@ -367,18 +397,21 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', applyLayout);
     })();
 
-    /* DOWNLOAD BROCHURE MODAL  */
+    /* DOWNLOAD BROCHURE MODAL 
+     hooks up the download brochure modal so it pops up when you click the download links  */
     (function initDownloadModal() {
         const modal = document.getElementById('downloadModal');
         const openBtns = document.querySelectorAll('.cta-download');
         const closeBtn = document.querySelector('.download-modal-close');
         if (!modal) return;
 
+        // shows the modal and stops the body page behind from scrolling around
         function openModal() {
             modal.hidden = false;
             document.body.style.overflow = 'hidden';
         }
 
+        // hides the modal and lets the page body scroll normally again
         function closeModal() {
             modal.hidden = true;
             document.body.style.overflow = '';
@@ -400,7 +433,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     })();
 
-    /*  REQUEST QUOTE MODAL */
+    /*  REQUEST QUOTE MODAL
+    connects the request quote modal the same way as the download one
+    listens to clicks on various quote buttons across the whole site  */
     (function initQuoteModal() {
         const modal = document.getElementById('quoteModal');
         const openBtns = document.querySelectorAll('.quote-button, .cta-request-button, .psb-cta');
@@ -409,11 +444,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!modal || !form) return;
 
+        // shows the quote modal and locks body scroll
         function openModal() {
             modal.hidden = false;
             document.body.style.overflow = 'hidden';
         }
 
+        // hides the quote modal and unlocks scroll
         function closeModal() {
             modal.hidden = true;
             document.body.style.overflow = '';
